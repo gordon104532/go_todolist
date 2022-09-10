@@ -1,2 +1,23 @@
-# go_todolist
-工作項目練習
+# go_todoList
+待辦事項功能練習
+
+## 功能項目
+- 基本的 新增 刪除 查詢 修改
+- 帳號系統
+- 網頁操作介面
+- Discord 操作介面
+- 到期提醒
+- 完成一個月的紀錄刪除
+- [練習] 寫測試
+
+## 待決定
+- 資料儲存內容
+- 設計架構
+- 資料儲存方式
+
+420642176876281887
+
+測試指令
+```
+go test -v -cover=true -timeout 30s -run ./app/Business/TodoList_test  main/app/Business/TodoList
+```
