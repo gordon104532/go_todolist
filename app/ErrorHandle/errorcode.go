@@ -1,6 +1,7 @@
 package ErrorHandle
 
 import (
+	"fmt"
 	"net/http"
 	"strings"
 
@@ -50,11 +51,17 @@ func ErrorWrapper(handle WrapperHandle) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		data, r := handle(c)
 		if r != nil {
-			resp := r.(ApiResp)
-			if resp.Code == "not json" {
-				return
-			}
-			c.JSON(http.StatusOK, resp)
+			// resp := r.(ApiResp)
+			// if resp.Code == "not json" {
+			// 	return
+			// }
+			// c.JSON(http.StatusOK, resp)
+
+			c.JSON(http.StatusOK, ApiResp{
+				Code:   "0", 
+				Text:   fmt.Sprintf("%v", r),
+				Result: "",
+			})
 
 		} else {
 			c.JSON(http.StatusOK, ApiResp{

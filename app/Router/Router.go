@@ -8,7 +8,7 @@ import (
 )
 
 func RouterStart() {
-	r := gin.Default()
+	r := gin.New()
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 
@@ -23,8 +23,8 @@ func RouterStart() {
 	api := r.Group("/api")
 	{
 		api.GET("/todo", e.ErrorWrapper(Handle.GetTodo))
-		api.POST("/todo", e.ErrorWrapper(Handle.GetTodo))
-		api.DELETE("/todo", e.ErrorWrapper(Handle.GetTodo))
+		api.POST("/todo", e.ErrorWrapper(Handle.AddTodo))
+		api.DELETE("/todo", e.ErrorWrapper(Handle.DeleteTodo))
 	}
 
 	r.Run(":8083")

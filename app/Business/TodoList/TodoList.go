@@ -16,10 +16,6 @@ var TodoStatus map[int64]string = map[int64]string{
 	4: "封存",
 }
 
-func init() {
-
-}
-
 // 依狀態列出待辦事項
 func ListByStatus(userID, status int64) (list []Todo) {
 	for i := range TodoList[userID] {
@@ -36,14 +32,18 @@ func AddTodo(userID int64, addedTodo Todo) {
 	WriteTodoListFile()
 }
 
-// 刪除待辦事項
-func DeleteTodo(userID int64, deleteCreatAt int64) {
+// 刪除待辦事項 
+func DeleteTodo(userID int64, deleteCreatAt int64) bool {
+	var isDeletedSuccess bool = false
 	for i := range TodoList[userID] {
-		if TodoList[userID][i].CreatAt == deleteCreatAt {
+		if TodoList[userID][i].CreatAt == deleteCreatAt && TodoList[userID][i].Status != 3 {
 			TodoList[userID][i].Status = 3
+			isDeletedSuccess = true
 			break
 		}
 	}
+
+	return isDeletedSuccess
 }
 
 // 編輯待辦事項
